@@ -43,9 +43,10 @@ public class CalculoRequest {
         this.uuidProyecto = uuidProyecto;
     }
 
-    public CalculoRequest(Integer idEstado, Integer dias, Integer persona) {
+    public CalculoRequest(Integer idEstado, Integer dias, Integer persona, UUID uuidProyecto) {
         this.idEstado = idEstado;
         this.dias = dias;
         this.persona = persona;
+        this.uuidProyecto = uuidProyecto;
     }
 }

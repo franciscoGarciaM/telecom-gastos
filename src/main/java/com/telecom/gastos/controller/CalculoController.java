@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/viatico")
@@ -23,9 +24,10 @@ public class CalculoController {
     @GetMapping("/calculo")
     public BigDecimal calculateViaticos(@RequestParam(value = "id_entidad") Integer idEntidad,
                                              @RequestParam(value ="numero_dias") Integer numeroDias,
-                                             @RequestParam(value = "numero_personas") Integer numeroPersonas) {
+                                             @RequestParam(value = "numero_personas") Integer numeroPersonas,
+                                              @RequestParam(value = "uuid_proyecto") UUID uuidProyecto) {
         return calculoService.calculateViatico(new CalculoRequest(idEntidad,
-                numeroDias, numeroPersonas));
+                numeroDias, numeroPersonas, uuidProyecto));
     }
 
     //add comnet git
