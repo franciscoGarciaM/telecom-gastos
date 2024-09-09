@@ -21,7 +21,7 @@ public class CalculoController {
 
 
     @GetMapping("/calculo")
-    public BigDecimal calculateViatico(@RequestParam(value = "id_entidad") Integer idEntidad,
+    public BigDecimal calculateViaticos(@RequestParam(value = "id_entidad") Integer idEntidad,
                                              @RequestParam(value ="numero_dias") Integer numeroDias,
                                              @RequestParam(value = "numero_personas") Integer numeroPersonas) {
         return calculoService.calculateViatico(new CalculoRequest(idEntidad,
