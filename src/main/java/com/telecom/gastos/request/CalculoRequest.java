@@ -1,10 +1,13 @@
 package com.telecom.gastos.request;
 
+import java.util.UUID;
+
 public class CalculoRequest {
 
         private Integer idEstado;
         private Integer dias;
         private Integer persona;
+        private UUID uuidProyecto;
 
     public Integer getPersona() {
         return persona;
@@ -31,6 +34,14 @@ public class CalculoRequest {
         public void setDias(Integer dias) {
             this.dias = dias;
         }
+
+    public UUID getUuidProyecto() {
+        return uuidProyecto;
+    }
+
+    public void setUuidProyecto(UUID uuidProyecto) {
+        this.uuidProyecto = uuidProyecto;
+    }
 
     public CalculoRequest(Integer idEstado, Integer dias, Integer persona) {
         this.idEstado = idEstado;

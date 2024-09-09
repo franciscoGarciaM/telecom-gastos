@@ -1,5 +1,6 @@
 package com.telecom.gastos.service;
 
+import com.telecom.gastos.client.AsignacionesClient;
 import com.telecom.gastos.repository.TabuladorRepository;
 import com.telecom.gastos.repository.ViaticoRepository;
 import com.telecom.gastos.request.CalculoRequest;
@@ -7,6 +8,7 @@ import com.telecom.gastos.model.Tabulador;
 import com.telecom.gastos.model.Viatico;
 import com.telecom.gastos.exception.ResourceNotFoundException;
 import com.telecom.gastos.response.ViaticoResponse;
+import com.telecom.gastos.response.external.ProyectoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ public class CalculoService {
 
     @Autowired
     private TabuladorRepository tabuladorRepository;
+
+    @Autowired
+    private AsignacionesClient asignacionesClient;
 
     @Autowired
     private ViaticoRepository viaticoRepository;
@@ -37,10 +42,14 @@ public class CalculoService {
         Tabulador tabulador = tabuladorRepository.findById(calculoRequest.getIdEstado())
                 .orElseThrow(() -> new ResourceNotFoundException("Estado no encontrado"));
 
+        ProyectoResponse proyectoResponse = asignacionesClient.getProyectoByUUID(calculoRequest.getUuidProyecto());
+        BigDecimal factorCobro = BigDecimal.valueOf(proyectoResponse.getFactorCobro());
+
         // Calcula el monto total del viatico
         BigDecimal monto = tabulador.getCostoDia()
                 .multiply(new BigDecimal(calculoRequest.getDias()))
-                .multiply(new BigDecimal(calculoRequest.getPersona()));
+                .multiply(new BigDecimal(calculoRequest.getPersona()))
+                .multiply(factorCobro);
         return monto;
 
         /*
