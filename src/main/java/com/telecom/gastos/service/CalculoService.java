@@ -1,6 +1,7 @@
 package com.telecom.gastos.service;
 
 import com.telecom.gastos.client.AsignacionesClient;
+import com.telecom.gastos.client.Empleados;
 import com.telecom.gastos.repository.TabuladorRepository;
 import com.telecom.gastos.repository.ViaticoRepository;
 import com.telecom.gastos.request.CalculoRequest;
@@ -8,6 +9,7 @@ import com.telecom.gastos.model.Tabulador;
 import com.telecom.gastos.model.Viatico;
 import com.telecom.gastos.exception.ResourceNotFoundException;
 import com.telecom.gastos.response.ViaticoResponse;
+import com.telecom.gastos.response.external.CuadrillaResponse;
 import com.telecom.gastos.response.external.ProyectoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class CalculoService {
 
     @Autowired
     private ViaticoRepository viaticoRepository;
+
+    @Autowired
+    private Empleados empleados;
 
     // Mtodo para mapear la entidad Viatico a la respuesta ViaticoResponse
     private ViaticoResponse mappingEntityToResponse(Viatico viatico) {
@@ -45,28 +50,18 @@ public class CalculoService {
         ProyectoResponse proyectoResponse = asignacionesClient.getProyectoByUUID(calculoRequest.getUuidProyecto());
         BigDecimal factorCobro = BigDecimal.valueOf(proyectoResponse.getFactorCobro());
 
+        CuadrillaResponse cuadrillaResponse = empleados.getCuadrillaByUUID(calculoRequest.getUuidCuadrilla());
+        BigDecimal factorCudrilla = BigDecimal.valueOf(cuadrillaResponse.getFactorCuadrilla());
+
+
+
         // Calcula el monto total del viatico
         BigDecimal monto = tabulador.getCostoDia()
                 .multiply(new BigDecimal(calculoRequest.getDias()))
                 .multiply(new BigDecimal(calculoRequest.getPersona()))
-                .multiply(factorCobro);
+                .multiply(factorCobro)
+                .multiply(factorCudrilla);
         return monto;
-
-        /*
-        // Crea la entidad Viatico
-        Viatico viatico = new Viatico();
-        viatico.setFechaInicio(LocalDate.now());
-        viatico.setFechaCambio(LocalDate.now());
-        viatico.setUuidViatico(UUID.randomUUID());
-        viatico.setMonto(monto);
-        Viatico savedViatico = viaticoRepository.save(viatico);
-        return mappingEntityToResponse(savedViatico);
-         */
-
-        // Guarda el viatico en la base de datos
-
-
-        // Retorna la respuesta mapeada
 
     }
 

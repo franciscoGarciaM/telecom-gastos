@@ -25,9 +25,10 @@ public class CalculoController {
     public BigDecimal calculateViaticos(@RequestParam(value = "id_entidad") Integer idEntidad,
                                              @RequestParam(value ="numero_dias") Integer numeroDias,
                                              @RequestParam(value = "numero_personas") Integer numeroPersonas,
-                                              @RequestParam(value = "uuid_proyecto") UUID uuidProyecto) {
+                                              @RequestParam(value = "uuid_proyecto") UUID uuidProyecto,
+                                             @RequestParam(value = "uuid_cuadrilla") UUID uuidCuadrilla) {
         return calculoService.calculateViatico(new CalculoRequest(idEntidad,
-                numeroDias, numeroPersonas, uuidProyecto));
+                numeroDias, numeroPersonas, uuidProyecto, uuidCuadrilla));
     }
 
     //add comnet git

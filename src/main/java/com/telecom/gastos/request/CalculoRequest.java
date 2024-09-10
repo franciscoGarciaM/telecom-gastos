@@ -8,6 +8,7 @@ public class CalculoRequest {
         private Integer dias;
         private Integer persona;
         private UUID uuidProyecto;
+        private UUID uuidCuadrilla;
 
     public Integer getPersona() {
         return persona;
@@ -43,10 +44,19 @@ public class CalculoRequest {
         this.uuidProyecto = uuidProyecto;
     }
 
-    public CalculoRequest(Integer idEstado, Integer dias, Integer persona, UUID uuidProyecto) {
+    public UUID getUuidCuadrilla() {
+        return uuidCuadrilla;
+    }
+
+    public void setUuidCuadrilla(UUID uuidCuadrilla) {
+        this.uuidCuadrilla = uuidCuadrilla;
+    }
+
+    public CalculoRequest(Integer idEstado, Integer dias, Integer persona, UUID uuidProyecto, UUID uuidCuadrilla) {
         this.idEstado = idEstado;
         this.dias = dias;
         this.persona = persona;
         this.uuidProyecto = uuidProyecto;
+        this.uuidCuadrilla = uuidCuadrilla;
     }
 }
