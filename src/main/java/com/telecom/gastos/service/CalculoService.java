@@ -58,7 +58,6 @@ public class CalculoService {
         // Calcula el monto total del viatico
         BigDecimal monto = tabulador.getCostoDia()
                 .multiply(new BigDecimal(calculoRequest.getDias()))
-                .multiply(new BigDecimal(calculoRequest.getPersona()))
                 .multiply(factorCobro)
                 .multiply(factorCudrilla);
         return monto;
