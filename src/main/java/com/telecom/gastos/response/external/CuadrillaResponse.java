@@ -8,6 +8,8 @@ public class CuadrillaResponse implements Serializable {
     private String puesto;
     private UUID uuidCuadrilla;
     private Double factorCuadrilla;
+    private Integer numeroEmpleados;
+
 
     public String getNomEmpleado() {
         return nomEmpleado;
@@ -39,5 +41,13 @@ public class CuadrillaResponse implements Serializable {
 
     public void setFactorCuadrilla(Double factorCuadrilla) {
         this.factorCuadrilla = factorCuadrilla;
+    }
+
+    public Integer getNumeroEmpleados() {
+        return numeroEmpleados;
+    }
+
+    public void setNumeroEmpleados(Integer numeroEmpleados) {
+        this.numeroEmpleados = numeroEmpleados;
     }
 }

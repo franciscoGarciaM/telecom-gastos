@@ -1,7 +1,7 @@
 package com.telecom.gastos.service;
 
 import com.telecom.gastos.client.AsignacionesClient;
-import com.telecom.gastos.client.Empleados;
+import com.telecom.gastos.client.EmpleadosClient;
 import com.telecom.gastos.repository.TabuladorRepository;
 import com.telecom.gastos.repository.ViaticoRepository;
 import com.telecom.gastos.request.CalculoRequest;
@@ -29,7 +29,7 @@ public class CalculoService {
     private ViaticoRepository viaticoRepository;
 
     @Autowired
-    private Empleados empleados;
+    private EmpleadosClient empleadosClient;
 
     // Mtodo para mapear la entidad Viatico a la respuesta ViaticoResponse
     private ViaticoResponse mappingEntityToResponse(Viatico viatico) {
@@ -50,8 +50,8 @@ public class CalculoService {
         ProyectoResponse proyectoResponse = asignacionesClient.getProyectoByUUID(calculoRequest.getUuidProyecto());
         BigDecimal factorCobro = BigDecimal.valueOf(proyectoResponse.getFactorCobro());
 
-        CuadrillaResponse cuadrillaResponse = empleados.getCuadrillaByUUID(calculoRequest.getUuidCuadrilla());
-        BigDecimal factorCudrilla = BigDecimal.valueOf(cuadrillaResponse.getFactorCuadrilla());
+        CuadrillaResponse cuadrillaResponse = empleadosClient.getCuadrillaByUUID(calculoRequest.getUuidCuadrilla());
+        BigDecimal factorCudrilla = BigDecimal.valueOf(cuadrillaResponse.getNumeroEmpleados());
 
 
 
